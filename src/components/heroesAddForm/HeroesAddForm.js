@@ -76,6 +76,7 @@ const HeroesAddForm = () => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm()
 
@@ -90,7 +91,7 @@ const HeroesAddForm = () => {
             .then(dispatch(heroCreated(data)))
             .catch((err) => console.log(err))
 
-        
+         reset() 
     }
 
     const onSubmit = (data) => onAddItem(data);
