@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useHttp } from '../../hooks/http.hook';
-import { activeFilterChanged, fetchFilters} from '../../actions';
+
+import {activeFilterChanged, fetchFilters} from './filtersSlice'
 import Spinner from '../spinner/Spinner';
 
 // Задача для этого компонента:
@@ -12,13 +13,13 @@ import Spinner from '../spinner/Spinner';
 // Представьте, что вы попросили бэкенд-разработчика об этом
 
 const HeroesFilters = () => {
-    const { filters, filtersLoadingStatus, activeFilter } = useSelector(state => state.filters);
+    const { filters, filtersLoadingStatus } = useSelector(state => state.filters);
     const dispatch = useDispatch();
     const { request } = useHttp();
 
     useEffect(() => {
      
-        dispatch(fetchFilters(request));
+        dispatch(fetchFilters());
         
         // eslint-disable-next-line
     }, []);

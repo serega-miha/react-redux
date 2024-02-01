@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHttp } from '../../hooks/http.hook';
-import { filtersFetched } from '../../actions';
+import { filtersFetched } from '../heroesFilters/filtersSlice';
 import {heroCreated} from '../heroesList/heroesSlice';
 
 // Задача для этого компонента:
