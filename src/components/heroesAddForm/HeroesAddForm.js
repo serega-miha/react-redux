@@ -2,7 +2,8 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHttp } from '../../hooks/http.hook';
-import { filtersFetched, heroesFetching, heroCreated } from '../../actions';
+import { filtersFetched } from '../../actions';
+import {heroCreated} from '../heroesList/heroesSlice';
 
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
@@ -16,7 +17,7 @@ import { filtersFetched, heroesFetching, heroCreated } from '../../actions';
 
 const HeroesAddForm = () => {
     //get filter
-    const { filters } = useSelector(state => state);
+    const { filters } = useSelector(state => state.filters);
     const dispatch = useDispatch();
     const { request } = useHttp();
 
