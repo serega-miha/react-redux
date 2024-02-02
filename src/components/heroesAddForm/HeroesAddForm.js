@@ -2,9 +2,12 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHttp } from '../../hooks/http.hook';
-import { filtersFetched } from '../heroesFilters/filtersSlice';
+import { filtersFetched , selectAll} from '../heroesFilters/filtersSlice';
 import {heroCreated} from '../heroesList/heroesSlice';
 
+
+import store from "../../store";
+import { global } from "../heroesFilters/filtersSlice";
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
 // в общее состояние и отображаться в списке + фильтроваться
@@ -17,18 +20,18 @@ import {heroCreated} from '../heroesList/heroesSlice';
 
 const HeroesAddForm = () => {
     //get filter
-    const { filters } = useSelector(state => state.filters);
+    const filters = selectAll(store.getState())
     const dispatch = useDispatch();
     const { request } = useHttp();
 
+    // const allFilters = global.selectAll(store.getState())
 
+    // useEffect(() => {
+    //     request("http://localhost:3001/filters")
+    //         .then(data => dispatch(filtersFetched(data)))
+    //     // eslint-disable-next-line
 
-    useEffect(() => {
-        request("http://localhost:3001/filters")
-            .then(data => dispatch(filtersFetched(data)))
-        // eslint-disable-next-line
-
-    }, []);
+    // }, []);
 
     //get filter finish
 

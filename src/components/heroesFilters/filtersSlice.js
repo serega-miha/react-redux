@@ -1,13 +1,24 @@
 
 import { useHttp } from "../../hooks/http.hook";
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
 
-const initialState = {
-    filters: [],
+const filtersAdapter = createEntityAdapter({
+    selectId: (filter) => filter.name,
+});
+
+// const initialState = {
+//     filters: [],
+//     filtersLoadingStatus: 'idle',
+//     activeFilter: 'all',
+//     filteredHeroes: []
+// }
+
+const initialState = filtersAdapter.getInitialState({
     filtersLoadingStatus: 'idle',
-    activeFilter: 'all',
-    filteredHeroes: []
-}
+    activeFilter: 'all'
+})
+// console.log(initialState);
+
 
 export const fetchFilters = createAsyncThunk(
     //тип действия в формате: имя среза - тип действия
@@ -24,10 +35,10 @@ const filterssSlice = createSlice({
     initialState,
     reducers: {
         // filtersFetching: state => {state.filtersLoadingStatus = 'loading'},
-        filtersFetched: (state, action) => {
-            state.filtersLoadingStatus = 'idle';
-            state.filters = action.payload;
-        },
+        // filtersFetched: (state, action) => {
+        //     state.filtersLoadingStatus = 'idle';
+        //     state.filters = action.payload;
+        // },
         // filtersFetchingError: state => {state.filtersLoadingStatus = 'error'},
         activeFilterChanged: (state, action) => {
             state.activeFilter = action.payload
@@ -39,7 +50,8 @@ const filterssSlice = createSlice({
             .addCase(fetchFilters.pending, state => {state.filtersLoadingStatus = 'loading'})
             .addCase(fetchFilters.fulfilled, (state, action) => {
                 state.filtersLoadingStatus = 'idle';
-                state.filters = action.payload;
+                filtersAdapter.setAll(state, action.payload);
+                // state.filters = action.payload;
             })
             .addCase(fetchFilters.rejected, state => {state.filtersLoadingStatus = 'error'})
             .addDefaultCase(() => {})
@@ -49,6 +61,12 @@ const filterssSlice = createSlice({
 const {actions, reducer } = filterssSlice;
 
 export default  reducer;
+
+export const global = filtersAdapter.getSelectors(state => state.filters);
+
+export const {selectAll} = filtersAdapter.getSelectors(state => state.filters);
+
+
 export const {
     filtersFetching,
     filtersFetched,

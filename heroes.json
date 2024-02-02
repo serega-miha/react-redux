@@ -7,28 +7,22 @@
       "id": 2
     },
     {
-      "name": "English",
-      "description": "dsfsdfsf",
-      "element": "wind",
-      "id": 5
-    },
-    {
       "name": "qwerty",
       "description": "sdfsdfsd",
       "element": "earth",
       "id": 6
     },
     {
-      "name": "qwerty",
-      "description": "dsfsdfs",
-      "element": "fire",
-      "id": 8
+      "name": "English",
+      "description": "asdasdasd",
+      "element": "water",
+      "id": 7
     },
     {
-      "name": "ashot",
-      "description": "sdfsdf",
+      "name": "English",
+      "description": "sdfsdfsd",
       "element": "fire",
-      "id": 9
+      "id": 8
     }
   ],
   "filters": [

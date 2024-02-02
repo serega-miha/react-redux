@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useHttp } from '../../hooks/http.hook';
-
-import {activeFilterChanged, fetchFilters} from './filtersSlice'
+import store from '../../store';
+import { global } from './filtersSlice';
+import {activeFilterChanged, fetchFilters, selectAll} from './filtersSlice'
 import Spinner from '../spinner/Spinner';
 
 // Задача для этого компонента:
@@ -13,7 +14,13 @@ import Spinner from '../spinner/Spinner';
 // Представьте, что вы попросили бэкенд-разработчика об этом
 
 const HeroesFilters = () => {
-    const { filters, filtersLoadingStatus } = useSelector(state => state.filters);
+    const { activeFilter, filtersLoadingStatus } = useSelector(state => state.filters);
+
+
+    
+    const filters = selectAll(store.getState())
+    console.log(filters);
+   
     const dispatch = useDispatch();
     const { request } = useHttp();
 
@@ -22,7 +29,9 @@ const HeroesFilters = () => {
         dispatch(fetchFilters());
         
         // eslint-disable-next-line
+
     }, []);
+
    
     if (filtersLoadingStatus === 'loading'){
         

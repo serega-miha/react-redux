@@ -15,8 +15,8 @@ const heroesAdapter = createEntityAdapter();
 const initialState = heroesAdapter.getInitialState({
     heroesLoadingStatus: 'idle'
 });
-// console.log(initialState);
 
+// console.log(initialState);
 
 export const fetchHeroes = createAsyncThunk(
     //тип действия в формате: имя среза - тип действия
